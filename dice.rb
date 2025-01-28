@@ -9,7 +9,7 @@ BetterErrors.application_root = __dir__
 BetterErrors::Middleware.allow_ip!('0.0.0.0/0.0.0.0')
 
 get("/") do
-  erb(:elephant)
+  erb(:elephant, { :layout => :wrapper })
 end
 
 get("/zebra") do
@@ -27,7 +27,7 @@ get("/dice/2/6") do
 	
     @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
 	
-  erb(:two_six)
+  erb(:two_six, { :layout => :wrapper })
 end
 
 get("/dice/2/10") do
@@ -37,15 +37,15 @@ get("/dice/2/10") do
 
     @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
 
-    erb(:two_ten)
+    erb(:two_ten, { :layout => :wrapper })
 end
 
 get("/dice/1/20") do
-  die = rand(1..20)
+  @die = rand(1..20)
 
-    @outcome = "You rolled a #{die}"
+    @outcome = "You rolled a #{@die}"
 
-   erb(:one_twenty)
+   erb(:one_twenty, { :layout => :wrapper })
 end
 
 get("/dice/5/4") do
@@ -58,5 +58,17 @@ get("/dice/5/4") do
   
     @outcome = "You rolled a #{first_die}, a #{second_die}, a #{third_die}, a #{fourth_die}, and a #{fifth_die} for a total of #{sum}."
 
-   erb(:five_four)
+   erb(:five_four, { :layout => :wrapper })
+end
+
+get("/dice/100/6") do
+  @rolls = []    # Create a blank array
+
+  100.times do    # 100 times...
+    die = rand(1..6)    # Generate a random number
+
+    @rolls.push(die)    # Add the random number to the array 
+  end
+
+  erb(:one_hundred_six)
 end

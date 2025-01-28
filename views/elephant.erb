@@ -1,4 +1,12 @@
- <h1>Dice Roll</h1>
+<h1>Dice Roll</h1>
+
+<ul>
+  <% @rolls.each do |a_roll| %>
+    <li>
+      <%= a_roll %>
+    </li>
+  <% end %>
+</ul>
 
  <ul>
     <li><a href="/dice/2/6">Roll two 6-sided dice</a></li>
