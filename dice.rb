@@ -21,44 +21,66 @@ get("/giraffe") do
 end
 
 get("/dice/2/6") do
-  first_die = rand(1..6)
-  second_die = rand(1..6)
-  sum = first_die + second_die
-	
-    @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
-	
-  erb(:two_six, { :layout => :wrapper })
+  @rolls = []    # Create a blank array
+
+  2.times do    # 2 times...
+    die = rand(1..6)    # Generate a random number
+
+    @rolls.push(die)    # Add the random number to the array 
+  end
+
+  <% if @die == 1 %>
+  <p style="color: red"><%= @outcome %></p>
+<% elsif @die == 20 %>
+  <p style="color: green"><%= @outcome %></p>
+<% else %>
+  <p><%= @outcome %></p>
+
+  @outcome = "You rolled a #{@die}."
+
+  erb(:two_six)
 end
 
 get("/dice/2/10") do
-  first_die = rand(1..10)
-  second_die = rand(1..10)
-  sum = first_die + second_die
+  @rolls = []    # Create a blank array
 
-    @outcome = "You rolled a #{first_die} and a #{second_die} for a total of #{sum}."
+  2.times do    # 2 times...
+    die = rand(1..10)    # Generate a random number
 
-    erb(:two_ten, { :layout => :wrapper })
+    @rolls.push(die)    # Add the random number to the array 
+  end
+
+  @outcome = "You rolled a #{@die}."
+
+  erb(:two_ten)
 end
 
 get("/dice/1/20") do
-  @die = rand(1..20)
+  @rolls = []    # Create a blank array
 
-    @outcome = "You rolled a #{@die}"
+  1.times do    # 1 time...
+    die = rand(1..20)    # Generate a random number
 
-   erb(:one_twenty, { :layout => :wrapper })
+    @rolls.push(die)    # Add the random number to the array 
+  end
+
+  @outcome = "You rolled a #{@die}."
+
+  erb(:one_twenty)
 end
 
 get("/dice/5/4") do
-  first_die = rand(1..4)
-  second_die = rand(1..4)
-  third_die = rand(1..4)
-  fourth_die = rand(1..4)
-  fifth_die = rand(1..4)
-  sum = first_die + second_die + third_die + fourth_die + fifth_die
-  
-    @outcome = "You rolled a #{first_die}, a #{second_die}, a #{third_die}, a #{fourth_die}, and a #{fifth_die} for a total of #{sum}."
+  @rolls = []    # Create a blank array
 
-   erb(:five_four, { :layout => :wrapper })
+  5.times do    # 5 times...
+    die = rand(1..4)    # Generate a random number
+
+    @rolls.push(die)    # Add the random number to the array 
+  end
+
+  @outcome = "You rolled a #{@die}."
+
+  erb(:five_four)
 end
 
 get("/dice/100/6") do
@@ -70,5 +92,7 @@ get("/dice/100/6") do
     @rolls.push(die)    # Add the random number to the array 
   end
 
+  @outcome = "You rolled a #{@die}."
+  
   erb(:one_hundred_six)
 end
